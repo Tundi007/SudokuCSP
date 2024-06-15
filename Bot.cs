@@ -25,10 +25,8 @@ internal class Bot
         else
             return new int[9,9];
 
-        bool CSP_Function(int[,] backupMap_2DInt)
+        bool CSP_Function(int[,] tempMap_2DInt)
         {
-
-            int[,] tempMap_2DInt = boardMap_2DInt.Clone() as int[,];
 
             int index_Int = struct_MyCSP.tableMRV_2DInt.Cast<int>().ToList().IndexOf(struct_MyCSP.tableMRV_2DInt.Cast<int>().Where(x => x != 10).Max());
 
