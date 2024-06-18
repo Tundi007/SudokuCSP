@@ -70,6 +70,65 @@ internal class MyUI
 
     }
 
+    /// This function is a general interface that displays a menu and awaits user input
+    public static int UserInterface2_Function(string menu_String, string number_String, out int output_Int)
+    {
+        // Initialize outputs
+
+        output_Int = 0;
+
+        // Clear console
+        Console.Clear();
+
+        // Display menu
+        System.Console.WriteLine(menu_String);
+
+        System.Console.WriteLine("->"+number_String);
+
+        // Await user input
+        switch (Console.ReadKey(true).Key)
+        {
+            // If enter is pressed, clear console and return true
+
+            case ConsoleKey.D:
+                Console.Clear();
+                output_Int = 4;
+                break;
+
+            case ConsoleKey.S:
+                Console.Clear();
+                output_Int = 3;
+                break;
+
+            case ConsoleKey.Enter:
+                Console.Clear();
+                return 1;
+
+            // If escape is pressed, set exit_Bool to true
+            case ConsoleKey.Escape:
+                output_Int = 2;
+                break;
+
+            // If up or down arrow is pressed, set output_Bool to true
+            case ConsoleKey.UpArrow:
+               output_Int = 1;
+               break;
+
+            case ConsoleKey.DownArrow:
+                output_Int = 0;
+                break;
+
+            // If any other key is pressed, do nothing
+            default:
+                break;
+
+        }
+
+        // Return false
+        return 0;
+
+    }
+
     /// This function is a general interface that displays a game menu and awaits user input
     public static int GameInterface_Function()
     {

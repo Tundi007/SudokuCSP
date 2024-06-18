@@ -18,11 +18,43 @@ internal class GameBoard
     }
 
     /// Returns the current state of the game board.
+    public static void sampleBoard_Function()
+    {
+
+        gameBoard_2DArrayInt[0,0] = 1;
+
+        gameBoard_2DArrayInt[0,8] = 9;
+
+        gameBoard_2DArrayInt[2,8] = 6;
+
+        gameBoard_2DArrayInt[3,1] = 1;
+
+        gameBoard_2DArrayInt[5,1] = 7;
+
+        gameBoard_2DArrayInt[6,7] = 5;
+
+        gameBoard_2DArrayInt[8,5] = 1;
+
+        defaultMap_2DArrayInt[0,0] = 1;
+
+        defaultMap_2DArrayInt[0,8] = 1;
+
+        defaultMap_2DArrayInt[2,8] = 1;
+
+        defaultMap_2DArrayInt[3,1] = 1;
+
+        defaultMap_2DArrayInt[5,1] = 1;
+
+        defaultMap_2DArrayInt[6,7] = 1;
+
+        defaultMap_2DArrayInt[8,5] = 1;
+
+    }
 
     public static void SetBoard_Function(int[,] board_2DArrayInt)
     {
         // Set the game board.
-        gameBoard_2DArrayInt = board_2DArrayInt.Clone() as int[,];
+        gameBoard_2DArrayInt = board_2DArrayInt;
 
         for (int i = 0; i < 9; i++)
         {

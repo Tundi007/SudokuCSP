@@ -28,28 +28,6 @@ internal class Program
         // Wait for 300 milliseconds
         Thread.Sleep(300);
 
-        // int[,] a = Generator.Generator_Function(50);
-
-        // for (int i = 0; i < 9; i++)
-        // {
-
-        //     for (int j = 0; j < 9; j++)
-        //     {
-
-        //         System.Console.Write(a[i,j] + " ");
-
-        //         if(j == 2 | j == 5)
-        //             System.Console.Write("| ");
-                
-        //     }
-
-        //     if(i == 2 | i == 5)
-        //         System.Console.WriteLine("\n---------------------");
-        //     else
-        //         System.Console.WriteLine();
-
-        // }
-
     }
 
 }

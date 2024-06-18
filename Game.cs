@@ -76,32 +76,61 @@ internal class Game
                 (bot_Bool, pointer_Bool) = (!bot_Bool, !pointer_Bool);
         }
 
-        pointer_Bool = false;
-
-        bool difficulty_Int_Bool = false;
-
         int difficulty_Int = 40;
 
         // Bot configuration selection loop
-        while (!MyUI.UserInterface_Function("Table Difficulty:", "Normal", "Scarce", pointer_Bool,
-            out bool valid_Bool, out bool exit_Bool))
+        while (MyUI.UserInterface2_Function("Table Difficulty:", difficulty_Int.ToString(), out int return_Int) == 0)
         {
-            // If exit is triggered, exit the game
-            if (exit_Bool)
+
+            if (return_Int == 4)
+            {
+
+                Console.Clear();
+
+                Bot.debugger_Int = 1;
+
+                Debugger_Function();
+
                 PrematureExit_Function();
 
+            }
+
+            // If exit is triggered, exit the game
+            if (return_Int == 2)
+                PrematureExit_Function();
+
+            if (return_Int == 3)
+            {
+
+                Console.Clear();
+
+                difficulty_Int = -1;
+
+                GameBoard.sampleBoard_Function();
+
+                break;
+
+            }
+
             // If valid input is triggered, toggle bot configurations
-            if (valid_Bool)
-                (difficulty_Int_Bool, pointer_Bool) = (!difficulty_Int_Bool, !pointer_Bool);
+            
+            if (return_Int == 1 & difficulty_Int < 75)
+                difficulty_Int+=5;
+            else
+            if(return_Int == 0 & difficulty_Int > 5)
+                difficulty_Int-=5;
+                
         }
 
-        if(difficulty_Int_Bool)
-            difficulty_Int = 65;
+        if(difficulty_Int != -1)
+        {
             
-        // Reset the game board
-        GameBoard.GameBoardReset_Function();
+            // Reset the game board
+            GameBoard.GameBoardReset_Function();
 
-        GameBoard.SetBoard_Function(Generator.Generator_Function(difficulty_Int));
+            GameBoard.SetBoard_Function(Generator.Generator_Function(difficulty_Int));
+
+        }
 
     }
 
@@ -124,6 +153,58 @@ internal class Game
         if (MyUI.GameInterface_Function() == 1)
             PrematureExit_Function();
             return false;
+    }
+
+    private static void Debugger_Function()
+    {
+
+        Console.Clear();
+
+        double bug_Int = 0;
+            
+        for (int j = 0; j < 31000; j++)
+        {
+
+            GameBoard.GameBoardReset_Function();            
+
+            GameBoard.SetBoard_Function(Generator.Generator_Function(75));
+
+            Bot.Bot_Function();
+
+            bug_Int += Bot.debug_Int;
+
+        }
+            
+        for (int j = 0; j < 10000; j++)
+        {
+
+            GameBoard.GameBoardReset_Function();            
+
+            GameBoard.SetBoard_Function(Generator.Generator_Function(55));
+
+            Bot.Bot_Function();
+
+            bug_Int += Bot.debug_Int;
+
+        }
+            
+        for (int j = 0; j < 10000; j++)
+        {
+
+            GameBoard.GameBoardReset_Function();            
+
+            GameBoard.SetBoard_Function(Generator.Generator_Function(35));
+
+            Bot.Bot_Function();
+
+            bug_Int += Bot.debug_Int;
+
+        }
+
+        System.Console.WriteLine($"Average: {bug_Int/30000}");        
+
+        Console.ReadKey();
+
     }
 
     /// Function to check if the player wants to rematch.
