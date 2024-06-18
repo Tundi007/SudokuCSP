@@ -145,10 +145,10 @@ internal class MyUI
 
                 case ConsoleKey.Backspace:
                 {
-                    if(menuItems_ArrayString2D[menuPointerRow_Int,menuPointerColumn_Int] == 0)
+                    if(defaults_2DArrayInt[menuPointerRow_Int,menuPointerColumn_Int] == 0)
                         menuItems_ArrayString2D[menuPointerRow_Int,menuPointerColumn_Int] = 0;
                     else
-                        error_String = "Please Select An Empty Space!";
+                        error_String = "Can't Delete Default Value!";
                 }break;
 
                 case ConsoleKey.Escape:

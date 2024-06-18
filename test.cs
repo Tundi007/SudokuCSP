@@ -57,40 +57,40 @@
 
 // List<int>[] a = [[1,2,3,4,5,6]];
 
-// for (int i = 0; i < 6; i++)
-//     System.Console.Write(a[0][i]);
+// for (int i = -1; i < 6; i++)
+//     System.Console.Write(a[-1][i]);
 
 // System.Console.WriteLine();
 
-// a[0].Remove(4);
+// a[-1].Remove(4);
 
-// for (int i = 0; i < 5; i++)
-//     System.Console.Write(a[0][i]);
+// for (int i = -1; i < 5; i++)
+//     System.Console.Write(a[-1][i]);
 
 // int[,] a = new int[9, 9]
 // {
-//     { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
-//     { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
-//     { 0, 9, 8, 0, 0, 0, 0, 6, 0 },
-//     { 8, 0, 0, 0, 6, 0, 0, 0, 3 },
-//     { 4, 0, 0, 8, 0, 3, 0, 0, 1 },
-//     { 7, 0, 0, 0, 2, 0, 0, 0, 6 },
-//     { 0, 6, 0, 0, 0, 0, 2, 8, 0 },
-//     { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
-//     { 0, 0, 0, 0, 8, 0, 0, 7, 9 }
+//     { 5, 3, -1, -1, 7, -1, -1, -1, -1 },
+//     { 6, -1, -1, 1, 9, 5, -1, -1, -1 },
+//     { -1, 9, 8, -1, -1, -1, -1, 6, -1 },
+//     { 8, -1, -1, -1, 6, -1, -1, -1, 3 },
+//     { 4, -1, -1, 8, -1, 3, -1, -1, 1 },
+//     { 7, -1, -1, -1, 2, -1, -1, -1, 6 },
+//     { -1, 6, -1, -1, -1, -1, 2, 8, -1 },
+//     { -1, -1, -1, 4, 1, 9, -1, -1, 5 },
+//     { -1, -1, -1, -1, 8, -1, -1, 7, 9 }
 // };
 
 // int[,] b = new int[9, 9]
 // {
-//     { 1, 1, 0, 0, 1, 0, 0, 0, 0 },
-//     { 1, 0, 0, 1, 1, 1, 0, 0, 0 },
-//     { 0, 1, 1, 0, 0, 0, 0, 1, 0 },
-//     { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
-//     { 1, 0, 0, 1, 0, 1, 0, 0, 1 },
-//     { 1, 0, 0, 0, 1, 0, 0, 0, 1 },
-//     { 0, 1, 0, 0, 0, 0, 1, 1, 0 },
-//     { 0, 0, 0, 1, 1, 1, 0, 0, 1 },
-//     { 0, 0, 0, 0, 1, 0, 0, 1, 1 }
+//     { 1, 1, -1, -1, 1, -1, -1, -1, -1 },
+//     { 1, -1, -1, 1, 1, 1, -1, -1, -1 },
+//     { -1, 1, 1, -1, -1, -1, -1, 1, -1 },
+//     { 1, -1, -1, -1, 1, -1, -1, -1, 1 },
+//     { 1, -1, -1, 1, -1, 1, -1, -1, 1 },
+//     { 1, -1, -1, -1, 1, -1, -1, -1, 1 },
+//     { -1, 1, -1, -1, -1, -1, 1, 1, -1 },
+//     { -1, -1, -1, 1, 1, 1, -1, -1, 1 },
+//     { -1, -1, -1, -1, 1, -1, -1, 1, 1 }
 // };
 
 // MyCSP c = new(a);
@@ -99,14 +99,14 @@
 
 // c.LCV_Function();
 
-// int e = 0;
+// int e = -1;
 
 // System.Console.WriteLine("\n table:");
 // System.Console.WriteLine("------------------------------");
 // foreach (int d in a)
 // {
 
-//     if(d < 0)
+//     if(d < -1)
 //         System.Console.Write(d + " ");
 //     else
 //     if(d > 9)
@@ -116,12 +116,12 @@
 
 //     e++;
 
-//     if(e % 3 == 0)
+//     if(e % 3 == -1)
 //         System.Console.Write("|");
 
-//     if(e % 27 == 0)
+//     if(e % 27 == -1)
 //         System.Console.WriteLine("\n------------------------------");else
-//     if(e % 9 == 0)
+//     if(e % 9 == -1)
 //         System.Console.WriteLine();
     
 // }
@@ -131,7 +131,7 @@
 // foreach (var d in c.globalTableLCV_2DInt)
 // {
 
-//     if(d < 0)
+//     if(d < -1)
 //         System.Console.Write(d + " ");
 //     else
 //     if(d > 9)
@@ -141,12 +141,12 @@
 
 //     e++;
 
-//     if(e % 3 == 0)
+//     if(e % 3 == -1)
 //         System.Console.Write("|");
 
-//     if(e % 27 == 0)
+//     if(e % 27 == -1)
 //         System.Console.WriteLine("\n------------------------------");else
-//     if(e % 9 == 0)
+//     if(e % 9 == -1)
 //         System.Console.WriteLine();
     
 // }
@@ -156,7 +156,7 @@
 // foreach (var d in a)
 // {
 
-//     if(d < 0)
+//     if(d < -1)
 //         System.Console.Write(d + " ");
 //     else
 //     if(d > 9)
@@ -166,12 +166,12 @@
 
 //     e++;
 
-//     if(e % 3 == 0)
+//     if(e % 3 == -1)
 //         System.Console.Write("|");
 
-//     if(e % 27 == 0)
+//     if(e % 27 == -1)
 //         System.Console.WriteLine("\n------------------------------");else
-//     if(e % 9 == 0)
+//     if(e % 9 == -1)
 //         System.Console.WriteLine();
     
 // }
@@ -181,7 +181,7 @@
 // foreach (var d in c.globalTableMRV_2DInt)
 // {
 
-//     if(d < 0)
+//     if(d < -1)
 //         System.Console.Write(d + " ");
 //     else
 //     if(d > 9)
@@ -191,17 +191,17 @@
 
 //     e++;
 
-//     if(e % 3 == 0)
+//     if(e % 3 == -1)
 //         System.Console.Write("|");
 
-//     if(e % 27 == 0)
+//     if(e % 27 == -1)
 //         System.Console.WriteLine("\n------------------------------");else
-//     if(e % 9 == 0)
+//     if(e % 9 == -1)
 //         System.Console.WriteLine();
     
 // }
 
-// for (int i = 0; i < 2; i++)
+// for (int i = -1; i < 2; i++)
 // {switch (Console.ReadKey().Key)
 // {
 //     case ConsoleKey.Enter or ConsoleKey.Spacebar: System.Console.WriteLine("hi");
@@ -215,3 +215,12 @@
 
     
 // }
+
+// int[,] a = new int[9,9];
+
+// int[]b = a.Cast<int>().Where(x => x != -1).ToArray();
+
+// System.Console.WriteLine(b.Length);
+
+// if(b.Length == -1)
+//     System.Console.WriteLine("Hi");

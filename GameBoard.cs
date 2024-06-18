@@ -22,7 +22,7 @@ internal class GameBoard
     public static void SetBoard_Function(int[,] board_2DArrayInt)
     {
         // Set the game board.
-        gameBoard_2DArrayInt = board_2DArrayInt;
+        gameBoard_2DArrayInt = board_2DArrayInt.Clone() as int[,];
 
         for (int i = 0; i < 9; i++)
         {
@@ -38,7 +38,7 @@ internal class GameBoard
     public static (int[,],int[,]) GameBoardStatus_Function()
     {
         // Returns the current state of the game board.
-        return (defaultMap_2DArrayInt,gameBoard_2DArrayInt);
+        return (gameBoard_2DArrayInt,defaultMap_2DArrayInt);
     }
 
     public static int CheckPlacement_Function(int playerRow_Int, int playerColumn_Int , int number_Int)

@@ -3,7 +3,7 @@ namespace Sudoku;
 internal class Game
 {
 
-    public static bool bot_Bool;
+    public static bool bot_Bool = true;
 
     /// Load function is responsible for setting up the game rules and starting the game.
     public static void Load_Function()
@@ -65,7 +65,7 @@ internal class Game
         // Initialize variables
         bool pointer_Bool = false;
         // Game mode selection loop
-        while(!MyUI.UserInterface_Function("Select Game Mode:", "Player", "Bot",
+        while(!MyUI.UserInterface_Function("Select Game Mode:", "Bot", "Player",
             pointer_Bool, out bool valid_Bool, out bool exit_Bool))
         {
             // If exit is triggered, exit the game
@@ -80,7 +80,7 @@ internal class Game
 
         bool difficulty_Int_Bool = false;
 
-        int difficulty_Int = 20;
+        int difficulty_Int = 40;
 
         // Bot configuration selection loop
         while (!MyUI.UserInterface_Function("Table Difficulty:", "Normal", "Scarce", pointer_Bool,
@@ -96,7 +96,7 @@ internal class Game
         }
 
         if(difficulty_Int_Bool)
-            difficulty_Int = 60;
+            difficulty_Int = 65;
             
         // Reset the game board
         GameBoard.GameBoardReset_Function();
@@ -105,19 +105,16 @@ internal class Game
 
     }
 
-    /// The main game loop that handles the game logic.
+    /// The main game
     private static void Game_Function()
     {
 
         int[,] answer_2DInt = new int[9,9];
 
         if (bot_Bool)
-            answer_2DInt = Bot.Bot_Function();
+            Bot.Bot_Function();
         else
             PlayerTurn_Function();
-
-        if(answer_2DInt.Cast<int>().Sum() == 0)
-            return;// couldnt solve
 
     }
 

@@ -1,51 +1,57 @@
 namespace Sudoku;
 
-public readonly struct MyCSP(int[,] inputBoard_2DInt)
+public struct MyCSP(int[,] inputBoard_2DInt)
 {
 
-    private readonly int[,] board_2DInt = inputBoard_2DInt;
+    public readonly int[][][] rangeBoard_2DInt =
+    [
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+        [new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],new int [9],],
+    ];
 
-    public readonly int[][][] rangeBoard_2DInt = new int[9][][];
-
-    public readonly int[,] tableMRV_2DInt
+    public int[,] tableMRV_2DInt =
     {
-        get
-        {
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0},
+    };
 
-            MRV_Function();
-            
-            return tableMRV_2DInt;
-            
-        }
-        set
-        { 
-            
-            tableMRV_2DInt = value; 
+    public int[,] tableLCV_2DInt =
+    {
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1},
+    };
 
-        }
+    public void Update_Function()
+    {
+
+        MRV_Function();
+
+        LCV_Function();
 
     }
 
-    public readonly int[][] tableLCV_2DInt
-    {
-        get
-        {
-
-            LCV_Function();
-            
-            return tableLCV_2DInt;
-            
-        }
-        set
-        {
-            
-            tableLCV_2DInt = value;
-
-        }
-
-    }
-
-    private readonly void MRV_Function()
+    private void MRV_Function()
     {
 
         tableMRV_2DInt = new int[9,9];
@@ -108,27 +114,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
 
                 square_Int += index2_Int/3;
 
-                if(board_2DInt[index1_Int,index2_Int] != 0)
+                if(inputBoard_2DInt[index1_Int,index2_Int] != 0)
                 {
 
-                    if(board_2DInt[index1_Int,index2_Int] == 10)
-                    {
+                    tableMRV_2DInt[index1_Int,index2_Int] = 10;
 
-                        tableMRV_2DInt[index1_Int,index2_Int] = 10;
+                    availableRowOptions_Int[index1_Int].Remove(inputBoard_2DInt[index1_Int,index2_Int]);
 
-                    }
-                    else
-                    {
+                    availableColumnOptions_Int[index2_Int].Remove(inputBoard_2DInt[index1_Int,index2_Int]);
 
-                        tableMRV_2DInt[index1_Int,index2_Int] = -1;
-
-                        availableRowOptions_Int[index1_Int].Remove(board_2DInt[index1_Int,index2_Int]);
-
-                        availableColumnOptions_Int[index2_Int].Remove(board_2DInt[index1_Int,index2_Int]);
-
-                        availableSquareOptions_Int[square_Int].Remove(board_2DInt[index1_Int,index2_Int]);
-
-                    }
+                    availableSquareOptions_Int[square_Int].Remove(inputBoard_2DInt[index1_Int,index2_Int]);
 
                 }
                         
@@ -152,7 +147,7 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
 
                 square_Int += index2_Int/3;
 
-                if(tableMRV_2DInt[index1_Int,index2_Int] != -1)
+                if(tableMRV_2DInt[index1_Int,index2_Int] != 10)
                 {
                     
                     rangeBoard_2DInt[index1_Int][index2_Int] =
@@ -165,7 +160,7 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         rangeBoard_2DInt[index1_Int][index2_Int].Length;
                     
                 }else
-                    rangeBoard_2DInt[index1_Int][index2_Int] = [0];
+                    rangeBoard_2DInt[index1_Int][index2_Int] = [-1];
                 
             }
             
@@ -173,22 +168,8 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
 
     }
 
-    private readonly void LCV_Function()
+    private void LCV_Function()
     {
-
-        tableLCV_2DInt =
-        [
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
-            [ -1, -1, -1, -1, -1, -1, -1, -1, -1 ]
-        ];
-
         
         int[][] array_2DInt = new int[9][];
 
@@ -200,7 +181,7 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
             for (int index1_Int = 0; index1_Int < 9; index1_Int++)
             {
 
-                array_2DInt[index_Int][index1_Int] = board_2DInt[index_Int,index1_Int];
+                array_2DInt[index_Int][index1_Int] = inputBoard_2DInt[index_Int,index1_Int];
 
             }
 
@@ -238,7 +219,7 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
             for (int index2_Int = 0; index2_Int < 9; index2_Int++)
             {
 
-                if(board_2DInt[index1_Int,index2_Int] == 0)
+                if(inputBoard_2DInt[index1_Int,index2_Int] == 0)
                 {
 
                     int square_Int = 0;
@@ -255,11 +236,11 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
 
                     square_Int += index2_Int/3;
 
-                    tableLCV_2DInt[index1_Int][index2_Int] = 0;
+                    tableLCV_2DInt[index1_Int,index2_Int] = 0;
 
-                    tableLCV_2DInt[index1_Int][index2_Int] += array_2DInt[index1_Int].Count(x => x ==0) - 1;
+                    tableLCV_2DInt[index1_Int,index2_Int] += array_2DInt[index1_Int].Count(x => x ==0) - 1;
 
-                    tableLCV_2DInt[index1_Int][index2_Int] += columnArray_2DInt[index2_Int].Count(x => x ==0) - 1;
+                    tableLCV_2DInt[index1_Int,index2_Int] += columnArray_2DInt[index2_Int].Count(x => x ==0) - 1;
 
                     switch (index1_Int)
                     {
@@ -300,16 +281,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][4] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][5] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][7] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][8] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -317,16 +298,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][1] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][2] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][7] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][8] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -334,16 +315,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][1] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][2] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][4] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][5] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -351,16 +332,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][3] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][5] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][6] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][8] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -368,16 +349,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][0] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][2] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][6] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][8] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -385,16 +366,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][0] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][2] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][3] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][5] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -402,16 +383,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][3] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][4] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][6] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][7] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -419,16 +400,16 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][0] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][1] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][6] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][7] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
 
@@ -436,23 +417,24 @@ public readonly struct MyCSP(int[,] inputBoard_2DInt)
                         {
 
                             if(sqareArray_2DInt[square_Int][0] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][1] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][3] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                             if(sqareArray_2DInt[square_Int][4] == 0)
-                                tableLCV_2DInt[index1_Int][index2_Int]++;
+                                tableLCV_2DInt[index1_Int,index2_Int]++;
 
                         }break;
                         
                         default: break;
                     }
                     
-                }
+                }else
+                    tableLCV_2DInt[index1_Int,index2_Int] = -1;
                         
             }
             
