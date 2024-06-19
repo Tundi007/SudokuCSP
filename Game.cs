@@ -87,8 +87,6 @@ internal class Game
 
                 Console.Clear();
 
-                Bot.debugger_Int = 1;
-
                 Debugger_Function();
 
                 PrematureExit_Function();
@@ -160,22 +158,13 @@ internal class Game
 
         Console.Clear();
 
-        double bug_Int = 0;
+        Bot.debugger_Int = 1;
+
+        int bug_Int = 0;
+
+        Bot.modifier_Int = 1;
             
-        for (int j = 0; j < 31000; j++)
-        {
-
-            GameBoard.GameBoardReset_Function();            
-
-            GameBoard.SetBoard_Function(Generator.Generator_Function(75));
-
-            Bot.Bot_Function();
-
-            bug_Int += Bot.debug_Int;
-
-        }
-            
-        for (int j = 0; j < 10000; j++)
+        for (int j = 0; j < 1000; j++)
         {
 
             GameBoard.GameBoardReset_Function();            
@@ -187,13 +176,19 @@ internal class Game
             bug_Int += Bot.debug_Int;
 
         }
+
+        System.Console.WriteLine($"Average (MRV == 1): {(double)bug_Int/1000}");
+
+        Bot.modifier_Int = 2;
+
+        bug_Int = 0;
             
-        for (int j = 0; j < 10000; j++)
+        for (int j = 0; j < 1000; j++)
         {
 
             GameBoard.GameBoardReset_Function();            
 
-            GameBoard.SetBoard_Function(Generator.Generator_Function(35));
+            GameBoard.SetBoard_Function(Generator.Generator_Function(55));
 
             Bot.Bot_Function();
 
@@ -201,7 +196,7 @@ internal class Game
 
         }
 
-        System.Console.WriteLine($"Average: {bug_Int/30000}");        
+        System.Console.WriteLine($"Average (MRV == 0.5): {(double)bug_Int/1000}");   
 
         Console.ReadKey();
 

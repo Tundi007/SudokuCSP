@@ -7,7 +7,7 @@ internal class Bot()
 
     public static int debugger_Int = 0;
 
-    public static int modifier_Int = 2;
+    public static int modifier_Int = 0;
 
     private static MyCSP struct_MyCSP;
 
@@ -41,7 +41,11 @@ internal class Bot()
 
             string info_String = "";
 
-            // index_Int = struct_MyCSP.tableMRV_2DInt.Cast<int>().ToList().IndexOf(minimumRange_Int);
+            // if(modifier_Int == 1)
+            //     index_Int = struct_MyCSP.tableMRV_2DInt.Cast<int>().ToList().IndexOf(minimumRange_Int);
+
+            // if(modifier_Int == 2)
+            //     index_Int = struct_MyCSP.tableLCV_2DInt.Cast<int>().ToList().IndexOf(leastConstraint_Int);
 
             if(minimumRange_Int < leastConstraint_Int)
                 (info_String,index_Int) = ("[MRV]",struct_MyCSP.tableMRV_2DInt.Cast<int>().ToList().IndexOf(minimumRange_Int));
